@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A small Next.js App Router app where the navbar, with active state, is rendered entirely on the server.
 
-## Getting Started
+Credit to [this Next.js PR](https://github.com/vercel/next.js/pull/65922).
 
-First, run the development server:
+### What are the drawbacks?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Firstly, this only works in prod mode. Secondly, it requires completely disabling the router cache.
+
+And there could be many edge cases. I don't know, I am not knowledgeable enough on the internal Next.js logic to make any statements regarding this issue.
+
+### Should I use this to make my navbar?
+
+Oh god no. Just
+
+```jsx
+"use client";
+
+export function NavbarItem({ href, children }) {
+  const pathname = usePathname()
+  const isActive = pathname === href;
+  return ...;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```jsx
+function Navbar() {
+  return items.map((item) => (
+    <NavbarItem href={item.href} key={item.href}>
+      {item.name}
+    </NavbarItem>
+  ));
+}
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You don't want to use internal undocumented APIs just for something as simple as this.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### How is this even possible?
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Same question, man. Same question.
