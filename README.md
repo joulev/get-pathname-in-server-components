@@ -34,6 +34,8 @@ function Navbar() {
 
 You don't want to use internal undocumented APIs just for something as simple as this.
 
+![](https://www.obilityb2b.com/wp-content/uploads/2020/07/Jeff-Goldblum-GIF.gif)
+
 ### How is this even possible?
 
 Same question, man. Same question.

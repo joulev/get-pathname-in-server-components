@@ -41,6 +41,9 @@ export default function RootLayout({
         <hr />
         <div>{children}</div>
         <hr />
+        <a href="https://github.com/joulev/get-pathname-in-server-components">
+          GitHub
+        </a>
       </body>
     </html>
   );
